@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { RiDeleteBinLine } from "react-icons/ri";
 import Select from "react-select";
 
@@ -18,7 +18,7 @@ import {
   timezoneOptionList,
   usTimeZone,
   user1,
-  user2
+  user2,
 } from "./settings.constant";
 import ScheduleCallPopup from "../userProfilePopup/userProfilePopup.component";
 
@@ -49,9 +49,10 @@ const generateTimeOptions = (minuteIncrement = 15) => {
 
 function Settings() {
   const uuId = uuidv4();
-  const [userInfo, setUserInfo] = useState(user1)
+  const [userInfo, setUserInfo] = useState(user1);
   const [otherUserInfo, setOtherUserInfo] = useState(user2);
-const [scheduleCallPopupVisible, setScheduleCallPopupVisible] = useState(false)
+  const [scheduleCallPopupVisible, setScheduleCallPopupVisible] =
+    useState(false);
 
   const [durations, setDurations] = useState([]);
   const [communicationType, setCommunicationType] = useState([]);
@@ -62,10 +63,10 @@ const [scheduleCallPopupVisible, setScheduleCallPopupVisible] = useState(false)
   const [availabilityAddRowError, setAvailabilityAddRowError] = useState(null);
   const [formEdited, setFormEdited] = useState(false);
 
-    useEffect( () => {
-        initialData(userInfo);
-        setOtherUserInfo(userInfo.id === 1 ? user2 : user1);
-    }, [userInfo])
+  useEffect(() => {
+    initialData(userInfo);
+    setOtherUserInfo(userInfo.id === 1 ? user2 : user1);
+  }, [userInfo]);
 
   const initialData = (user) => {
     setDurations(user.durations);
@@ -273,16 +274,16 @@ const [scheduleCallPopupVisible, setScheduleCallPopupVisible] = useState(false)
   }
 
   const handleSwitchUser = () => {
-    if(userInfo.id === 1) {
-        setUserInfo(user2)
+    if (userInfo.id === 1) {
+      setUserInfo(user2);
     } else {
-        setUserInfo(user1);
+      setUserInfo(user1);
     }
-  }
+  };
 
   const handleScheduleCallPopup = () => {
     setScheduleCallPopupVisible(!scheduleCallPopupVisible);
-  }
+  };
 
   return (
     <div className="container-fluid">
@@ -494,6 +495,6 @@ const [scheduleCallPopupVisible, setScheduleCallPopupVisible] = useState(false)
       </div>
     </div>
   );
-};
+}
 
 export default Settings;

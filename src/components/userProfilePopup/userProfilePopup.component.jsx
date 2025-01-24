@@ -39,27 +39,26 @@ const ScheduleCallPopup = ({
   displayClosebtn = true,
   ...props
 }) => {
-
-//   const senderuserId = useSelector((state) => state.user.userId);
-//   const token = useSelector((state) => state.user.token);
-//   const userfirstname = useSelector((state) => state.user.firstName);
-//   const userlastname = useSelector((state) => state.user.lastName);
-//   const useremail = useSelector((state) => state.user.email);
-//   const userprofile = useSelector((state) => state.user.profile_picture);
-//   const headline = useSelector((state) => state.user.headline);
-//   const industry = useSelector((state) => state.user.industry);
-//   const interested_in = useSelector((state) => state.user.interested_in);
-//   const country = useSelector((state) => state.user.country);
-//   const city = useSelector((state) => state.user.city);
-//   const state = useSelector((state) => state.user.state);
-//   const organization = useSelector((state) => state.user.organization);
-//   const university = useSelector((state) => state.user.university);
-//   const classification = useSelector((state) => state.user.classification);
+  //   const senderuserId = useSelector((state) => state.user.userId);
+  //   const token = useSelector((state) => state.user.token);
+  //   const userfirstname = useSelector((state) => state.user.firstName);
+  //   const userlastname = useSelector((state) => state.user.lastName);
+  //   const useremail = useSelector((state) => state.user.email);
+  //   const userprofile = useSelector((state) => state.user.profile_picture);
+  //   const headline = useSelector((state) => state.user.headline);
+  //   const industry = useSelector((state) => state.user.industry);
+  //   const interested_in = useSelector((state) => state.user.interested_in);
+  //   const country = useSelector((state) => state.user.country);
+  //   const city = useSelector((state) => state.user.city);
+  //   const state = useSelector((state) => state.user.state);
+  //   const organization = useSelector((state) => state.user.organization);
+  //   const university = useSelector((state) => state.user.university);
+  //   const classification = useSelector((state) => state.user.classification);
   const scheduleSettings = {
     timeZone: {
       value: "US/Central",
     },
-  };// Current login user ScheduleSettings
+  }; // Current login user ScheduleSettings
 
   const [userProfile, setUserProfile] = useState(null);
   const [dateState, setDateState] = useState(moment());
@@ -188,7 +187,6 @@ const ScheduleCallPopup = ({
     setDurationOption(props?.durationOptions);
   }, [props?.durationOptions]);
 
-
   const availableDays = (availableHour) => {
     const selectedDays = new Set(
       availableHour.map((i) => parseInt(i.selecteDay))
@@ -217,9 +215,7 @@ const ScheduleCallPopup = ({
     }
   };
 
-  const sendRequest = () => {
-
-  };
+  const sendRequest = () => {};
 
   const generateTimeOptions = () => {
     const timeOptions = [];
@@ -373,20 +369,20 @@ const ScheduleCallPopup = ({
 
   const startTimeOptionUI = () => {
     return (
-        <select
-      name="start_time"
-      id="starttime"
-      required
-      value={startTime}
-      className="form-control"
-      onChange={(e) => {
-        setStartTime(e.target.value);
-        calculateEndTime(e.target.value, durationState);
-      }}
-    >
-      {generateTimeOptions()}
-    </select>
-    )
+      <select
+        name="start_time"
+        id="starttime"
+        required
+        value={startTime}
+        className="form-control"
+        onChange={(e) => {
+          setStartTime(e.target.value);
+          calculateEndTime(e.target.value, durationState);
+        }}
+      >
+        {generateTimeOptions()}
+      </select>
+    );
   };
 
   const getStartTimeDropdownOption = (date) => {
