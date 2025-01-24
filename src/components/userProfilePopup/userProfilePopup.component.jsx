@@ -11,6 +11,10 @@ import { MdLocalPhone, MdOutlineVideocam } from "react-icons/md";
 // import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 import CustomTooltip from "../toolTips/tooltips.components";
+import {
+  sundayWeekStart,
+  timezoneOptionList,
+} from "../settings/settings.constant";
 // import { durationOptionList } from "../../pages/schedule/settings/settings.constant";
 // import { Link } from "react-router-dom/cjs/react-router-dom.min";
 // import { useCalendarDays } from "../../hooks/useCalendarDays";
@@ -37,29 +41,27 @@ const ScheduleCallPopup = ({
   senderTimeZone,
   displayRequestCall = true,
   displayClosebtn = true,
+  scheduleTimezone,
   ...props
 }) => {
-  //   const senderuserId = useSelector((state) => state.user.userId);
-  //   const token = useSelector((state) => state.user.token);
-  //   const userfirstname = useSelector((state) => state.user.firstName);
-  //   const userlastname = useSelector((state) => state.user.lastName);
-  //   const useremail = useSelector((state) => state.user.email);
-  //   const userprofile = useSelector((state) => state.user.profile_picture);
-  //   const headline = useSelector((state) => state.user.headline);
-  //   const industry = useSelector((state) => state.user.industry);
-  //   const interested_in = useSelector((state) => state.user.interested_in);
-  //   const country = useSelector((state) => state.user.country);
-  //   const city = useSelector((state) => state.user.city);
-  //   const state = useSelector((state) => state.user.state);
-  //   const organization = useSelector((state) => state.user.organization);
-  //   const university = useSelector((state) => state.user.university);
-  //   const classification = useSelector((state) => state.user.classification);
+  // Flatten the timezoneOptionList
+
+  // Function to get calendar type based on the input timezone
+  const getWeekStartCalendarType = (timeZone) => {
+    console.log("timefkjdv", timeZone);
+    const region = timeZone?.split("/")[0];
+    const isSundayWeekStart =
+      sundayWeekStart.includes(timeZone) || sundayWeekStart.includes(region);
+    return isSundayWeekStart ? "gregory" : "iso8601";
+  };
+
+  const calendarType = getWeekStartCalendarType(scheduleTimezone);
+  console.log("calendar type", calendarType);
   const scheduleSettings = {
     timeZone: {
       value: "US/Central",
     },
   }; // Current login user ScheduleSettings
-
   const [userProfile, setUserProfile] = useState(null);
   const [dateState, setDateState] = useState(moment());
   const [timeState, setTimeState] = useState();
@@ -386,7 +388,7 @@ const ScheduleCallPopup = ({
   };
 
   const getStartTimeDropdownOption = (date) => {
-    const day = moment.tz(date, scheduleSettings?.timeZone?.value).day();
+    const day = moment.tz(date, scheduleTimezone).day();
 
     // find value from object by day
     const itemFound = props?.availabilityHour
@@ -497,7 +499,7 @@ const ScheduleCallPopup = ({
 
   const handleClickDay = (value) => {
     const selectedDate = moment
-      .tz(value, scheduleSettings?.timeZone?.value)
+      .tz(value, scheduleTimezone)
       .format("YYYY-MM-DDTHH:mm:ss");
 
     setDateState(selectedDate);
@@ -557,12 +559,11 @@ const ScheduleCallPopup = ({
                         minDate={
                           availableDates?.length
                             ? moment(availableDates[0]).toDate()
-                            : moment
-                                .tz(moment(), scheduleSettings?.timeZone?.value)
-                                .toDate()
+                            : moment.tz(moment(), scheduleTimezone).toDate()
                         }
                         showNeighboringMonth={false}
                         view="month"
+                        calendarType={calendarType}
                         locale="en"
                         next2Label={null}
                         prev2Label={null}
@@ -602,7 +603,11 @@ const ScheduleCallPopup = ({
                           <h4 className="schedule-title">
                             Current selected date is
                           </h4>
-                          <p>{moment(dateState).format("MMMM Do YYYY")}</p>
+                          <p>
+                            {moment(dateState)
+                              .tz(scheduleTimezone)
+                              ?.format("MMMM Do YYYY")}
+                          </p>
                         </div>
 
                         <div className="mb-4">
