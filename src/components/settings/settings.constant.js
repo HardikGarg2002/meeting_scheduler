@@ -2623,10 +2623,10 @@ export const sundayWeekStart = [
   "Antarctica",
 
   "CST6CDT",
-  // "EST5EDT",
-  // "HST",
-  // "MST7MDT",
-  // "PST8PDT",
-  // "Jamaica",
-  // "Navajo",
+  "EST5EDT",
+  "HST",
+  "MST7MDT",
+  "PST8PDT",
+  "Jamaica",
+  "Navajo",
 ];
