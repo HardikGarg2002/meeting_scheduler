@@ -1,0 +1,408 @@
+.user_popup {
+    position: relative;
+    background-color: #ffffff;
+    border: 2px solid #dddddd;
+
+    &_outerbox {
+        align-items: center;
+        position: absolute;
+        z-index: 99999;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        bottom: 0;
+    }
+
+    &_loading{
+        position: absolute;
+        z-index: 2;
+        left: 15px;
+        right: 15px;
+        bottom: 0;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(243, 243, 243, 0.9);
+
+        p{
+            margin: 0;
+            font-size: 25px;
+            font-weight: 600;
+            font-style: italic;
+        }
+    }
+
+    &_notes {
+        .username{
+            font-size: clamp(20px, 5vw, 30px);
+            margin-bottom: 10px;
+        }
+        .creditinfo{
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 500;
+            b{
+                color: green;
+            }
+        }
+        .note{
+            max-width: 76%;
+            margin: auto;
+            margin-bottom: 1em;
+            @media (max-width: 767px) {
+                max-width: 100%;
+            }
+        }
+    }
+
+    &_thumbnail{
+        border: 2px solid #dddd;
+        margin: 0 20px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        background-size: cover;
+        background-position: center;
+        width: 200px;
+        max-width: 250px;
+        height: 200px;
+        max-height: 250px;
+        margin: auto;
+
+        @media (max-width: 767px) {
+            width: 120px;
+            height: 120px;
+        }
+
+        &_circle {
+            width: 80px;
+            height: 80px;
+            margin: auto;
+            margin-bottom: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #dddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &_name{
+        font-weight: 600;
+        font-size: 22px;
+    }
+
+    &_designation{
+        font-size: 15px;
+        font-weight: 500;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    &_cancel{
+        padding: 0;
+        border: 0;
+        font-weight: 600;
+        color: #ca2727;
+        background-color: transparent;
+        &:hover{
+            text-decoration: none;
+            color: #000000;
+        }
+    }
+
+    &_list{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        &_item{
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            font-weight: 500;
+            &:not(:last-child){
+                margin-bottom: 12px;
+            }
+
+            @media (max-width: 767px) {
+                font-size: 14px;
+            }
+
+            span{
+                &:first-child{
+                    min-width: 40px;
+                    color: green;
+                }
+            }
+        }
+    }
+
+    .disabled_btn{
+        &:hover {
+            color: green;
+            svg {
+                fill: green;
+            }
+        }
+    }
+
+    &_schedulecall_btn{
+        background-color: #3861b3;
+        color: #ffffff;
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: 600;
+        outline: none;
+        border: 2px solid transparent;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media (max-width: 767px) {
+            font-size: 14px;
+        }
+
+        svg{
+            margin-right: 10px;
+        }
+        &.next_profile{
+            position: relative;
+            background-color: #1b3269;
+            &:not(:disabled) {
+                &:hover{
+                    &::before{
+                        content: '-1 Credit';
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        top: 0;
+                        bottom: 0;
+                        color: #ca2727;
+                        background-color: rgba(255,255,255,1);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+
+        &:hover{
+            background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #dddddd;
+            svg{
+                fill: #000000;
+            }
+        }
+    }
+
+    &_container{
+        max-width: 860px;
+        margin: auto;
+        margin-top: 1.5em;
+        padding-bottom: 1.5em;
+        position: absolute;
+        z-index: 4;
+        // left: 12em;
+        left: 0;
+        right: 0;
+    }
+
+    &_backdrop {
+        position: absolute;
+        z-index: 3;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255,255,255,0.6);
+    }
+
+    .schedule_calendar{
+        background: transparent;
+        border: 0;
+        margin: auto;
+
+        .react-calendar__navigation {
+            &__arrow, &__label{
+                color: #ffffff;
+                &:hover{
+                    color: #000000;
+                }
+            }
+
+            button[disabled]{
+                background: transparent;
+            }
+        }
+
+        .react-calendar__month-view__days__day{
+            &:not(.react-calendar__month-view__days__day--neighboringMonth){
+                color: #ffffff;
+            }
+            border-radius: 50%;
+            &:disabled {
+                background: transparent;
+                color: rgba(204, 204, 204, 0.5);
+            }
+            &:not(:disabled):hover {
+                color: #000000 !important;
+            }
+            &.react-calendar__tile--now{
+                background: transparent;
+                &:hover{
+                    background: #ffffff;
+                }
+                &:disabled {
+                    pointer-events: none;
+                }
+            }
+        }
+        .react-calendar__month-view__days__day--neighboringMonth{
+            color: #cccccc;
+        }
+        .react-calendar__tile--active.react-calendar__month-view__days__day{
+            background-color: #ffffff;
+            color: #000000 !important;
+            &:disabled {
+                background-color: rgba(255, 255, 255, 0.5);
+            }
+        }
+    }
+
+    #calender_panel{
+        background: #3861b3;
+        color: #ffffff;
+        @media (min-width: 1024px) {
+            max-width: 45%;
+            flex: 1;
+        }
+    }
+
+    #input_panel{
+        color: #000000;
+        @media (min-width: 1024px) {
+            max-width: 55%;
+            flex: 1;
+        }
+        .schedule-title {
+            font-size: 20px;
+        }
+
+        .form-check-label{
+            &.active, &:hover {
+                background: #3861b3;
+            }
+        }
+
+        #starttime {
+            option {
+                span {
+                    font-size: 14px;
+                    color: #cccccc;
+                }
+            }
+        }
+
+        .communication_type {
+            @media (max-width: 767px) {
+                gap: 10px 0;
+            }
+            .form-check-label {
+                text-transform: capitalize;
+                &.active {
+                    font-weight: 700;
+                    background-color: transparent;
+                    color: #3861b3;
+                    border: 1px solid #3861b3;
+                    font-size: 15px;
+                }
+                &:hover {
+                    background: transparent;
+                }
+            }
+        }
+
+        .btn-request-call{
+            padding: 10px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    }
+
+    &_container {
+        &.evenSizebox {
+            @media (min-width: 991px) {
+                #calender_panel {
+                    max-width: 50%;
+                    flex: 1;
+                }
+                #input_panel {
+                    max-width: 50%;
+                    flex: 1;
+                }
+            }
+        }
+    }
+
+    .close_popup{
+        position: absolute;
+        z-index: 10;
+        right: 20px;
+        top: 15px;
+        cursor: pointer;
+        &.disabled {
+            opacity: 0.5;
+            cursor: default;
+            &:hover {
+                color: rgba(0, 0, 0, 0.7);
+            }
+        }
+        &:hover {
+            color: rgba(255,0,0,0.7);
+        }
+    }
+
+    #overlay_screen {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 9;
+    }
+}
+
+.static_reschedule_popup {
+    width: 100%;
+    .user_popup {
+        &_backdrop {
+            background: none;
+            display: none;
+        }
+
+        &_container {
+            position: relative;
+            margin: auto;
+        }
+
+        &_name,
+        &_designation,
+        &_list {
+            color: #000000;
+        }
+
+        #calender_panel {
+            .user_popup_name {
+                color: #ffffff;
+            }
+        }
+    }
+}

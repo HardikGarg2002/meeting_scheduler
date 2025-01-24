@@ -1,0 +1,29 @@
+.schedule-settings{
+    &-container {
+        padding-left: 15px;
+        padding-right: 15px;
+        position: relative;
+        z-index: 0;
+
+        .title {
+            font-size: 30px;
+            font-weight: 400;
+            margin-bottom: 1em;
+        }
+
+        .availability_window_row {
+            display: flex;
+            align-items: center;
+
+            select {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+.container {
+    @media (min-width: 1200px) {
+        max-width: 1280px;
+    }
+}
