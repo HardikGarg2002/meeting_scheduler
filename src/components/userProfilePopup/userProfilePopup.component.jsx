@@ -502,7 +502,7 @@ const ScheduleCallPopup = ({
       .tz(value, scheduleTimezone)
       .format("YYYY-MM-DDTHH:mm:ss");
 
-    setDateState(selectedDate);
+    setDateState(value);
     // setDateState(moment(value).toISOString());
     if (props?.scheduleSettings) {
       getStartTimeDropdownOption(value);
